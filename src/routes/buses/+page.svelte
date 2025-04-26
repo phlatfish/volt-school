@@ -9,7 +9,7 @@
 	let statusFilter = '';
 
 	let newBus: Omit<Bus, 'id'> = {
-		number: '',  // User will provide this
+		number: '', 
 		capacity: 48,
 		driver: {
 			name: '',
@@ -41,10 +41,9 @@
 	function toggleAddBus() {
 		isAddingBus = !isAddingBus;
 		
-		// Reset form
 		if (isAddingBus) {
 			newBus = {
-				number: '',  // User will provide this
+				number: '', 
 				capacity: 48,
 				driver: {
 					name: '',
@@ -66,7 +65,6 @@
 				throw new Error('Bus identifier is required');
 			}
 			
-			// Clean up the input
 			newBus.number = newBus.number.trim();
 			
 			busStore.add(newBus);
