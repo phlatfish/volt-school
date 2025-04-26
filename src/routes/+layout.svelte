@@ -7,6 +7,11 @@
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
 			<div class="flex justify-between items-center">
 				<div class="flex items-center">
+					<img 
+						src="/voltschool.png" 
+						alt="Voltschool Logo" 
+						class="h-8 w-auto mr-3"
+					/>
 					<h1 class="text-2xl font-bold text-primary m-0">Voltschool</h1>
 					<span class="ml-2 text-sm text-gray-500">District Code: 572394</span>
 				</div>
@@ -25,4 +30,4 @@
 	<main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 		<slot />
 	</main>
-</div> 
+</div>
