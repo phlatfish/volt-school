@@ -4,6 +4,7 @@ import { browser } from '$app/environment';
 
 export interface Student {
   id: string;
+  studentCode: string;
   firstName: string;
   lastName: string;
   grade: string;
@@ -14,10 +15,18 @@ export interface Student {
     name: string;
     phone: string;
     email: string;
+    guardianCode: string;
   };
 }
 
 const initialStudents: Student[] = [];
+
+function generateRandomCode(): string {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  return Array.from({ length: 6 }, () => 
+    characters.charAt(Math.floor(Math.random() * characters.length))
+  ).join('');
+}
 
 const createStudentStore = () => {
   const { subscribe, set, update } = writable<Student[]>(initialStudents);
@@ -45,10 +54,19 @@ const createStudentStore = () => {
 
   return {
     subscribe,
-    add: (student: Omit<Student, 'id'>) => {
+    add: (student: Omit<Student, 'id' | 'studentCode' | 'guardian'> & { guardian: Omit<Student['guardian'], 'guardianCode'> }) => {
       update((students) => {
         const newId = `S${1000 + students.length + 1}`;
-        return [...students, { ...student, id: newId }];
+        const newStudent = { 
+          ...student, 
+          id: newId,
+          studentCode: generateRandomCode(),
+          guardian: {
+            ...student.guardian,
+            guardianCode: generateRandomCode()
+          }
+        };
+        return [...students, newStudent];
       });
     },
     update: (id: string, updatedStudent: Partial<Student>) => {

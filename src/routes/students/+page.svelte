@@ -225,6 +225,8 @@
 								<th class="text-left p-2">Grade</th>
 								<th class="text-left p-2">School</th>
 								<th class="text-left p-2">Bus</th>
+								<th class="text-left p-2">Student Code</th>
+								<th class="text-left p-2">Guardian Code</th>
 								<th class="text-left p-2">Actions</th>
 							</tr>
 						</thead>
@@ -241,6 +243,12 @@
 										{:else}
 											<span class="text-gray-400">No bus assigned</span>
 										{/if}
+									</td>
+									<td class="p-2">
+										<span class="font-mono text-sm">{student.studentCode}</span>
+									</td>
+									<td class="p-2">
+										<span class="font-mono text-sm">{student.guardian.guardianCode}</span>
 									</td>
 									<td class="p-2">
 										<div class="flex space-x-2">
@@ -270,4 +278,4 @@
 			{/if}
 		</div>
 	{/if}
-</div> 
+</div>

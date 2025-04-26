@@ -206,6 +206,10 @@
 							<p class="text-sm text-gray-500">Address</p>
 							<p class="font-medium">{student.address}</p>
 						</div>
+						<div>
+							<p class="text-sm text-gray-500">Student Code</p>
+							<p class="font-mono">{student.studentCode}</p>
+						</div>
 					</div>
 				</div>
 
@@ -223,6 +227,10 @@
 						<div>
 							<p class="text-sm text-gray-500">Email</p>
 							<p class="font-medium">{student.guardian.email}</p>
+						</div>
+						<div>
+							<p class="text-sm text-gray-500">Guardian Code</p>
+							<p class="font-mono">{student.guardian.guardianCode}</p>
 						</div>
 					</div>
 				</div>
@@ -299,4 +307,4 @@
 			<p class="text-center py-8 text-gray-500">Student not found.</p>
 		</div>
 	{/if}
-</div> 
+</div>
