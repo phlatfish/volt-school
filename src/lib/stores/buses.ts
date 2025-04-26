@@ -3,8 +3,8 @@ import { uploadData, fetchData, deleteData } from '$lib/services/supabaseClient'
 import { browser } from '$app/environment';
 
 export interface Bus {
-  id: string;       // Will be same as number
-  number: string;   // User-provided identifier (e.g., "B-101", "A12", etc.)
+  id: string;
+  number: string; 
   capacity: number;
   driver: {
     name: string;
