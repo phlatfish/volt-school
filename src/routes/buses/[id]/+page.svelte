@@ -16,7 +16,7 @@
 			bus = buses.find((b) => b.id === busId) || null;
 			
 			if (bus && isEditing) {
-				editedBus = JSON.parse(JSON.stringify(bus)); // Deep copy
+				editedBus = JSON.parse(JSON.stringify(bus));
 			}
 		});
 
@@ -49,7 +49,7 @@
 		isEditing = !isEditing;
 		
 		if (isEditing && bus) {
-			editedBus = JSON.parse(JSON.stringify(bus)); // Deep copy
+			editedBus = JSON.parse(JSON.stringify(bus));
 		}
 	}
 
