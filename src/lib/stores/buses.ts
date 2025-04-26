@@ -3,8 +3,8 @@ import { uploadData, fetchData, deleteData } from '$lib/services/supabaseClient'
 import { browser } from '$app/environment';
 
 export interface Bus {
-  id: string;
-  number: string;
+  id: string;       // Will be same as number
+  number: string;   // User-provided identifier (e.g., "B-101", "A12", etc.)
   capacity: number;
   driver: {
     name: string;
@@ -48,11 +48,15 @@ const createBusStore = () => {
     subscribe,
     add: (bus: Omit<Bus, 'id'>) => {
       update((buses) => {
-        const nextBusNumber = buses.length > 0 
-          ? Math.max(...buses.map(b => parseInt(b.number))) + 1
-          : 101;
-        const newId = `B-${nextBusNumber}`;
-        return [...buses, { ...bus, id: newId, number: nextBusNumber.toString() }];
+        // Use the bus number as the ID
+        const newId = bus.number;
+        
+        // Check if bus number already exists
+        if (buses.some(b => b.number === bus.number)) {
+          throw new Error('A bus with this identifier already exists');
+        }
+        
+        return [...buses, { ...bus, id: newId }];
       });
     },
     update: (id: string, updatedBus: Partial<Bus>) => {
@@ -99,4 +103,4 @@ const createBusStore = () => {
   };
 };
 
-export const busStore = createBusStore(); 
+export const busStore = createBusStore();

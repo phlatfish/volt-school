@@ -9,7 +9,7 @@
 	let statusFilter = '';
 
 	let newBus: Omit<Bus, 'id'> = {
-		number: '',
+		number: '',  // User will provide this
 		capacity: 48,
 		driver: {
 			name: '',
@@ -44,7 +44,7 @@
 		// Reset form
 		if (isAddingBus) {
 			newBus = {
-				number: '',
+				number: '',  // User will provide this
 				capacity: 48,
 				driver: {
 					name: '',
@@ -61,8 +61,19 @@
 	}
 
 	function addBus() {
-		busStore.add(newBus);
-		isAddingBus = false;
+		try {
+			if (!newBus.number.trim()) {
+				throw new Error('Bus identifier is required');
+			}
+			
+			// Clean up the input
+			newBus.number = newBus.number.trim();
+			
+			busStore.add(newBus);
+			isAddingBus = false;
+		} catch (error) {
+			alert(error.message);
+		}
 	}
 
 	function removeBus(id: string) {
@@ -111,6 +122,20 @@
 			<h2 class="mb-4">Add New Bus</h2>
 			<form on:submit|preventDefault={addBus} class="space-y-4">
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+					<div class="form-control">
+						<label for="busNumber" class="form-label">Bus Identifier</label>
+						<input
+							id="busNumber"
+							type="text"
+							bind:value={newBus.number}
+							class="form-input"
+							placeholder="Enter bus identifier (e.g., B-101, A12)"
+							required
+						/>
+						<p class="text-sm text-gray-500 mt-1">
+							Enter a unique identifier for the bus
+						</p>
+					</div>
 					<div class="form-control">
 						<label for="capacity" class="form-label">Capacity</label>
 						<input
@@ -296,4 +321,4 @@
 			{/if}
 		</div>
 	{/if}
-</div> 
+</div>
